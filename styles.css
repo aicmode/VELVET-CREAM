@@ -334,87 +334,62 @@ h3 {
 
 .product-portrait {
   position: relative;
-  min-height: 560px;
+  width: min(440px, 100%);
+  aspect-ratio: 4 / 5;
+  justify-self: center;
+  min-height: 0;
   display: grid;
   place-items: center;
 }
 
-.pint {
-  position: relative;
-  width: min(360px, 82vw);
-  aspect-ratio: 0.68;
-  border: 1px solid rgba(232, 208, 138, 0.34);
-  border-radius: 50% 50% 12px 12px / 10% 10% 12px 12px;
-  background:
-    radial-gradient(ellipse at 42% 12%, rgba(247,239,226,0.42), transparent 22%),
-    linear-gradient(115deg, rgba(247,239,226,0.13), transparent 28%),
-    linear-gradient(150deg, #1d120d, #392216 50%, #100b08);
-  box-shadow: var(--shadow), inset 0 0 70px rgba(201,164,92,0.12);
-  overflow: hidden;
+.product-portrait,
+.visual-frame,
+.panel-visual,
+.texture-top,
+.swatch,
+.mood {
+  isolation: isolate;
 }
 
-.pint::before {
+.product-portrait img,
+.visual-frame img,
+.panel-visual img,
+.texture-top img,
+.swatch img,
+.mood img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.product-portrait {
+  overflow: hidden;
+  border: 1px solid rgba(232, 208, 138, 0.28);
+  background: #090706;
+  box-shadow: var(--shadow);
+}
+
+.product-portrait img {
+  object-position: 72% 50%;
+  filter: saturate(0.82) contrast(1.06) brightness(0.82);
+}
+
+.product-portrait::after,
+.visual-frame::after,
+.panel-visual::after,
+.texture-top::after,
+.swatch::after,
+.mood::before {
   content: "";
   position: absolute;
-  left: -5%;
-  right: -5%;
-  top: 11%;
-  height: 20%;
-  border-block: 1px solid rgba(232, 208, 138, 0.35);
-  background: linear-gradient(90deg, rgba(201,164,92,0.08), rgba(247,239,226,0.16), rgba(201,164,92,0.08));
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(8,7,6,0.04), rgba(8,7,6,0.32)),
+    radial-gradient(circle at 70% 24%, rgba(232,208,138,0.14), transparent 24rem);
 }
-
-.pint-label {
-  position: absolute;
-  inset: 35% 12% auto;
-  min-height: 180px;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  border: 1px solid rgba(232, 208, 138, 0.36);
-  background: rgba(8,7,6,0.42);
-}
-
-.pint-label strong {
-  display: block;
-  font-size: 2.05rem;
-  line-height: 0.95;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.pint-label span {
-  display: block;
-  margin-top: 18px;
-  color: var(--gold-bright);
-  font-family: Inter, Arial, sans-serif;
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.orbital-note {
-  position: absolute;
-  width: 142px;
-  min-height: 142px;
-  display: grid;
-  place-items: center;
-  padding: 18px;
-  border: 1px solid rgba(232, 208, 138, 0.24);
-  border-radius: 50%;
-  background: rgba(8, 7, 6, 0.5);
-  color: rgba(247,239,226,0.75);
-  font-family: Inter, Arial, sans-serif;
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
-  line-height: 1.6;
-  text-align: center;
-  text-transform: uppercase;
-  backdrop-filter: blur(10px);
-}
-
-.orbital-note.one { left: 0; top: 16%; }
-.orbital-note.two { right: 0; bottom: 20%; border-color: rgba(169,216,232,0.26); }
 
 .split,
 .two-col {
@@ -476,6 +451,8 @@ h3 {
 }
 
 .texture-top {
+  position: relative;
+  overflow: hidden;
   height: 132px;
   margin: -28px -28px 26px;
   border-bottom: 1px solid var(--line);
@@ -485,9 +462,32 @@ h3 {
     linear-gradient(135deg, #21140f, #64412a 48%, #100b08);
 }
 
-.texture-top.chocolate { background: radial-gradient(circle at 38% 38%, rgba(232,208,138,0.18), transparent 26%), linear-gradient(135deg, #160c08, #4b2818 54%, #0b0705); }
-.texture-top.gold { background: radial-gradient(circle at 70% 34%, rgba(247,239,226,0.24), transparent 24%), linear-gradient(135deg, #2b1a0e, #9a6a2e 52%, #17100a); }
-.texture-top.ice { background: radial-gradient(circle at 34% 36%, rgba(169,216,232,0.36), transparent 22%), linear-gradient(135deg, #101516, #3c4c48 52%, #0d0907); }
+.texture-top img,
+.swatch img,
+.panel-visual img,
+.mood img {
+  filter: saturate(0.82) contrast(1.08) brightness(0.78);
+  transform: scale(1.01);
+}
+
+.visual-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #090706;
+  box-shadow: 0 24px 68px rgba(0,0,0,0.28);
+}
+
+.collection-preview {
+  aspect-ratio: 16 / 7;
+  margin: 0 0 22px;
+}
+
+.gift-preview {
+  width: min(760px, 100%);
+  aspect-ratio: 16 / 7;
+  margin: 30px auto 0;
+}
 
 .meta {
   color: var(--gold-bright);
@@ -537,6 +537,7 @@ h3 {
 .mood::after {
   content: attr(data-label);
   position: absolute;
+  z-index: 2;
   left: 20px;
   bottom: 18px;
   color: rgba(247,239,226,0.75);
@@ -571,6 +572,11 @@ h3 {
   padding-bottom: 82px;
 }
 
+.page-visual {
+  aspect-ratio: 16 / 7;
+  margin-top: 42px;
+}
+
 .flavor-card,
 .ingredient-card,
 .gift-card {
@@ -583,10 +589,21 @@ h3 {
 .flavor-card .swatch,
 .ingredient-card .swatch,
 .gift-card .swatch {
+  position: relative;
+  overflow: hidden;
   height: 118px;
   margin: -24px -24px 24px;
   border-bottom: 1px solid var(--line);
   background: var(--swatch);
+}
+
+.panel-visual {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  margin: -30px -30px 26px;
+  border-bottom: 1px solid var(--line);
+  background: #090706;
 }
 
 .notes {
@@ -688,6 +705,11 @@ h3 {
 .info-panel,
 .form-panel {
   padding: 30px;
+}
+
+.info-panel h2,
+.form-panel h2 {
+  font-size: clamp(2rem, 3.4vw, 3.35rem);
 }
 
 .faq-list details {
@@ -870,11 +892,8 @@ textarea:focus {
   }
 
   .product-portrait {
-    min-height: 460px;
+    width: min(520px, 100%);
   }
-
-  .orbital-note.one { left: 2%; top: 8%; }
-  .orbital-note.two { right: 2%; bottom: 8%; }
 
   .card-grid,
   .card-grid.four,
@@ -929,22 +948,7 @@ textarea:focus {
   }
 
   .product-portrait {
-    min-height: 390px;
-  }
-
-  .pint {
-    width: min(280px, 78vw);
-  }
-
-  .pint-label strong {
-    font-size: 1.48rem;
-  }
-
-  .orbital-note {
-    width: 110px;
-    min-height: 110px;
-    padding: 12px;
-    font-size: 0.52rem;
+    width: min(360px, 100%);
   }
 
   .section-head {
@@ -961,6 +965,18 @@ textarea:focus {
 
   .mood-grid {
     grid-auto-rows: 150px;
+  }
+
+  .collection-preview,
+  .gift-preview,
+  .page-visual {
+    aspect-ratio: 4 / 3;
+  }
+
+  .flavor-card .swatch,
+  .ingredient-card .swatch,
+  .gift-card .swatch {
+    height: 150px;
   }
 
   .timeline-item {
